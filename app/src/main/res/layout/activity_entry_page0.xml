@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout tools:context=".scene.EntryActivity"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    xmlns:tools="http://schemas.android.com/tools">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Welcome to\nSign Lingua"
+            android:textSize="32sp"
+            android:textAlignment="center"
+            android:fontFamily="@font/primary_font"
+            android:textFontWeight="600"
+            android:textColor="@color/white"
+            android:layout_marginBottom="24dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="The thriving community where everyone is valued regardless of impairment"
+            android:textSize="14sp"
+            android:textAlignment="center"
+            android:fontFamily="@font/primary_font"
+            android:paddingHorizontal="45dp"
+            android:textColor="#C3C9CF"
+            android:layout_marginBottom="16dp"/>
+
+        <Button
+            android:id="@+id/entry_activity_btn_lets_go"
+            android:layout_width="160dp"
+            style="@style/PrimaryButtonVariant1"
+            android:text="Let's Go"
+            android:paddingVertical="12dp"
+            android:paddingStart="32dp"
+            android:paddingEnd="24dp"
+            android:drawableEnd="@drawable/baseline_arrow_forward_24"/>
+
+    </LinearLayout>

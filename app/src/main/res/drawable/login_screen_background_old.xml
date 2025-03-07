@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<!-- Solid color background for the entire window -->
+<item>
+    <shape android:shape="rectangle">
+        <solid android:color="#1D1134" />
+    </shape>
+</item>
+<!-- Background image positioned at the top -->
+<item android:gravity="top">
+    <bitmap
+        android:src="@drawable/login_screen_bg"
+        android:gravity="top" />
+</item>
+</layer-list>

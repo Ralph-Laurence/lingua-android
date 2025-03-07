@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_weight="1">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sign up and join\nthe community!"
+        android:textSize="32sp"
+        android:textAlignment="center"
+        android:fontFamily="@font/primary_font"
+        android:textFontWeight="600"
+        android:textColor="@color/white"
+        android:layout_marginBottom="24dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Creating an account is always FREE. Because we believe that education should be accessible to everyone."
+        android:textSize="14sp"
+        android:textAlignment="center"
+        android:fontFamily="@font/primary_font"
+        android:paddingHorizontal="45dp"
+        android:textColor="#C3C9CF"
+        android:layout_marginBottom="32dp"/>
+
+    <Button
+        android:id="@+id/entry_activity_btn_get_started"
+        android:layout_width="160dp"
+        style="@style/PrimaryButtonVariant1"
+        android:text="Get Started"/>
+
+</LinearLayout>

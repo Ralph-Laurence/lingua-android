@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background layer with dark color -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#1D1134"/>
+        </shape>
+    </item>
+    <!-- Top layer with white background and rounded bottom-right corner -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#FFFFFF"/>
+            <corners android:bottomRightRadius="65dp"/>
+        </shape>
+    </item>
+</layer-list>
