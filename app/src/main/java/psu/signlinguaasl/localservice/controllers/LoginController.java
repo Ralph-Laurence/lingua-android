@@ -100,12 +100,8 @@ public class LoginController
         RetrofitClient.setAuthToken(token);
 
         // Save token securely using SharedPreferences or EncryptedSharedPreferences
-        SecureAuthToken tokenStore = new SecureAuthToken(context);
-        tokenStore.saveToken(token);
-
         AuthenticatedSession session = AuthenticatedSession.getInstance(context);
-        session.setUser(user);
-        session.setAuthToken(token);
+        session.setSession(token, user);
 
         // Launch the home page (add the flags to prevent going back)
         Intent intent = new Intent(context, HomeActivity.class);
@@ -137,7 +133,7 @@ public class LoginController
             JSONObject jsonObject = new JSONObject(errorBody);
             String errorMessage = jsonObject.getString("message");
 
-            Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show();
+            modal.ShowDanger(errorMessage, "Try Again");
         }
         catch (Exception e)
         {

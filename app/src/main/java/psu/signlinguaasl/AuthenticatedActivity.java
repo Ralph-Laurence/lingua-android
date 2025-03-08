@@ -57,7 +57,7 @@ public abstract class AuthenticatedActivity
         // Check if the user can access this activity.
         m_session = AuthenticatedSession.getInstance(this.getApplicationContext());
 
-        if (TextUtils.isEmpty(m_session.getAuthToken()) || m_session.getUser() == null)
+        if (Str.IsNullOrEmpty(m_session.getAuthToken()) || m_session.getUser() == null)
         {
             Intent loginIntent = new Intent(m_context, LoginActivity.class);
             startActivity(loginIntent);

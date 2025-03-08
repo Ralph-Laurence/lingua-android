@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,7 +34,10 @@ import java.util.Objects;
 
 import psu.signlinguaasl.IActivityBlueprint;
 import psu.signlinguaasl.R;
+import psu.signlinguaasl.localservice.auth.AuthenticatedSession;
+import psu.signlinguaasl.localservice.utils.Prefs;
 import psu.signlinguaasl.ui.animations.FadeViewPagerPageTransformer;
+import psu.signlinguaasl.ui.animations.Transitions;
 import psu.signlinguaasl.ui.viewadapters.EntryActivityViewPagerAdapter;
 
 public class EntryActivity extends AppCompatActivity implements IActivityBlueprint
@@ -46,9 +50,12 @@ public class EntryActivity extends AppCompatActivity implements IActivityBluepri
     private Button getStartedButton;
     private TextView txtBtnNextPager;
     private EntryActivityViewPagerAdapter adapter;
-    private Context m_context;
+    private RelativeLayout splashOverlay;
+    private Context m_globalContext;
+    private Context m_thisContext;
     private int lastPage;
     private int[] splashPagerImages;
+    private boolean isUserDragging = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -56,10 +63,28 @@ public class EntryActivity extends AppCompatActivity implements IActivityBluepri
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
 
-        m_context = this.getApplicationContext();
+        m_globalContext = this.getApplicationContext();
+        m_thisContext = EntryActivity.this;
 
-        InitializeObjects();
-        InitializeViews();
+        setContentView(R.layout.activity_entry);
+
+        // Allow the splash screen to show 3secs ... then proceed
+        new Handler().postDelayed(() -> {
+
+            // We will skip the intro when the app is ran the 2nd time
+            int lastRanStat = Prefs.getInstance(getApplicationContext())
+                    .read(Prefs.PREF_KEY_FIRST_RUN, 0);
+
+            if (lastRanStat == 1)
+            {
+                goToLoginPage();
+                return;
+            }
+
+            InitializeObjects();
+            InitializeViews();
+
+        }, 3000);
     }
 
     @Override
@@ -76,7 +101,7 @@ public class EntryActivity extends AppCompatActivity implements IActivityBluepri
 
         adapter = new EntryActivityViewPagerAdapter
         (
-            m_context,
+            m_thisContext,
             splashPagerImages.length
         );
 
@@ -86,14 +111,13 @@ public class EntryActivity extends AppCompatActivity implements IActivityBluepri
     @Override
     public void InitializeViews()
     {
-        setContentView(R.layout.activity_entry);
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
+        splashOverlay    = findViewById(R.id.entry_activity_splash_overlay);
         splashPagerImage = findViewById(R.id.entry_activity_splash_image);
         viewPager2       = findViewById(R.id.entry_activity_content_view_pager);
         pagerIndicator   = findViewById(R.id.entry_activity_view_pager_indicators);
@@ -105,36 +129,36 @@ public class EntryActivity extends AppCompatActivity implements IActivityBluepri
         viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback()
         {
             @Override
-            public void onPageSelected(int position)
-            {
+            public void onPageSelected(int position) {
                 super.onPageSelected(position);
+                // Your existing code here...
 
                 // The "Let's go" button is located at the very first page.
-                // We need to access it and add a click functionality to it.
-                // However, we'll retrieve it only once.
-                if (position == 0 && letsGoButton == null)
-                {
+                if (position == 0 && letsGoButton == null) {
                     RegisterLetsGoButtonClick(viewPager2);
                 }
 
-                // The "Get Started" button is located at the very last page.
-                // Similar to the lets go button, we need to access this only
-                // once and bind a click listener to it.
-                if (position == lastPage && getStartedButton == null)
-                {
+                if (position == lastPage && getStartedButton == null) {
                     RegisterGetStartedButtonClick();
                 }
 
                 SwitchPagerSplashImage(position);
 
-                // Show the page indicator dots
-                if (position == 0 || position == lastPage)
-                {
+                if (position == 0 || position == lastPage) {
                     pagerWrapper.setVisibility(View.INVISIBLE);
                     return;
                 }
 
                 pagerWrapper.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                if (state == ViewPager2.SCROLL_STATE_DRAGGING) {
+                    isUserDragging = true;
+                } else if (state == ViewPager2.SCROLL_STATE_IDLE || state == ViewPager2.SCROLL_STATE_SETTLING) {
+                    isUserDragging = false;
+                }
             }
         });
 
@@ -150,6 +174,8 @@ public class EntryActivity extends AppCompatActivity implements IActivityBluepri
         }
 
         txtBtnNextPager.setOnClickListener(view -> fakeDragToNextPage(viewPager2));
+
+        Transitions.FadeOut(splashOverlay, 1000, () -> splashOverlay.setVisibility(View.GONE));
     }
 
     private void SwitchPagerSplashImage(int position)
@@ -203,23 +229,22 @@ public class EntryActivity extends AppCompatActivity implements IActivityBluepri
         if (getStartedButton == null)
             return;
 
-        getStartedButton.setOnClickListener(view -> {
-            Intent loginActivity = new Intent(m_context, LoginActivity.class);
-            loginActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(loginActivity);
-            finish();
-        });
+        getStartedButton.setOnClickListener(view -> goToLoginPage());
     }
 
     private void fakeDragToNextPage(ViewPager2 viewPager2)
     {
-        final int DURATION = 200; // Duration of the fake drag in milliseconds
+        // Temporarily disable user swipes
+        viewPager2.setUserInputEnabled(false);
+
+        if (viewPager2.isFakeDragging() || isUserDragging)
+            return;
+
+        final int DURATION = 500; // Duration of the fake drag in milliseconds
         final int PIXELS_PER_FRAME = 50; // Number of pixels to drag per frame
 
-        // Start the fake drag
-        if (!viewPager2.isFakeDragging()) {
-            viewPager2.beginFakeDrag();
-        }
+        // Start the fake drag if not already dragging and viewPager2 is not currently dragging
+        viewPager2.beginFakeDrag();
 
         Handler handler = new Handler(Looper.getMainLooper());
         long startTime = SystemClock.uptimeMillis();
@@ -231,7 +256,7 @@ public class EntryActivity extends AppCompatActivity implements IActivityBluepri
             {
                 long elapsed = SystemClock.uptimeMillis() - startTime;
 
-                if (elapsed < DURATION)
+                if (viewPager2.isFakeDragging() && elapsed < DURATION)
                 {
                     // Compute the distance to drag based on the elapsed time and speed
                     float dragDistance = PIXELS_PER_FRAME * (elapsed / (float) DURATION);
@@ -240,10 +265,23 @@ public class EntryActivity extends AppCompatActivity implements IActivityBluepri
                 }
                 else
                 {
-                    // End the fake drag
-                    viewPager2.endFakeDrag();
+                    // End the fake drag if still dragging
+                    if (viewPager2.isFakeDragging()) {
+                        viewPager2.endFakeDrag();
+                    }
+
+                    //Enable user swipes
+                    viewPager2.setUserInputEnabled(true);
                 }
             }
         });
+    }
+
+    private void goToLoginPage()
+    {
+        Intent loginActivity = new Intent(m_thisContext, LoginActivity.class);
+        loginActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(loginActivity);
+        finish();
     }
 }

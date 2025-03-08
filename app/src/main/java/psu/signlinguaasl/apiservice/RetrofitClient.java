@@ -1,7 +1,10 @@
 package psu.signlinguaasl.apiservice;
 
 import android.content.Context;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.text.TextUtils;
+import android.util.Log;
 
 import okhttp3.OkHttpClient;
 import psu.signlinguaasl.apiservice.middleware.AuthMiddleware;
@@ -13,6 +16,7 @@ public class RetrofitClient {
     private static volatile Retrofit m_retrofit = null;
     private static volatile RetrofitClient m_instance;
     private static volatile String m_authToken;
+    private static WifiManager m_wifiMan;
 
     private RetrofitClient() {}
 
@@ -21,9 +25,20 @@ public class RetrofitClient {
         if (m_instance == null) {
             m_instance = new RetrofitClient();
             m_authToken = AuthenticatedSession.getInstance(context.getApplicationContext()).getAuthToken();
+            m_wifiMan = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         }
         return m_instance;
     }
+
+//    public String getBaseUrl()
+//    {
+//        WifiInfo wifiInf = m_wifiMan.getConnectionInfo();
+//        int ipAddress = wifiInf.getIpAddress();
+//        String ipv4 = String.format("%d.%d.%d.%d", (ipAddress & 0xff),(ipAddress >> 8 & 0xff),(ipAddress >> 16 & 0xff),(ipAddress >> 24 & 0xff));
+//        String ip = String.format("%s%s:%s/api/", Routes.PROTOCOL, ipv4, Routes.PORT);
+//        Log.e("console", "IP IS = " + ip);
+//        return ip + "/api/";
+//    }
 
     public synchronized Retrofit getClient()
     {
@@ -38,6 +53,7 @@ public class RetrofitClient {
 
             m_retrofit = new Retrofit.Builder()
                     .baseUrl(Routes.BASE_URL)
+                    //.baseUrl(getBaseUrl())
                     .client(clientBuilder.build())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();

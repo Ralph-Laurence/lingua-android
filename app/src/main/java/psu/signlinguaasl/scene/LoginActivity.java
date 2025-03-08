@@ -1,6 +1,7 @@
 package psu.signlinguaasl.scene;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 import psu.signlinguaasl.IActivityBlueprint;
 import psu.signlinguaasl.R;
 import psu.signlinguaasl.localservice.controllers.LoginController;
+import psu.signlinguaasl.localservice.utils.Prefs;
 import psu.signlinguaasl.ui.custom.Modal;
 
 public class LoginActivity extends AppCompatActivity implements IActivityBlueprint
@@ -28,15 +30,11 @@ public class LoginActivity extends AppCompatActivity implements IActivityBluepri
 
     private LoginController loginController;
 
-    private Context m_context;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-
-        m_context = LoginActivity.this; //getApplicationContext();
 
         InitializeObjects();
         InitializeViews();
@@ -44,7 +42,9 @@ public class LoginActivity extends AppCompatActivity implements IActivityBluepri
 
     public void InitializeObjects()
     {
-        loginController = new LoginController(m_context);
+        Prefs.getInstance(getApplicationContext()).store(Prefs.PREF_KEY_FIRST_RUN, 1);
+
+        loginController = new LoginController(LoginActivity.this);
     }
 
     public void InitializeViews()

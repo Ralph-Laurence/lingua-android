@@ -4,24 +4,33 @@ import android.widget.TextView;
 
 import psu.signlinguaasl.AuthenticatedActivity;
 import psu.signlinguaasl.R;
+import psu.signlinguaasl.base.BaseAuthenticatedActivity;
+import psu.signlinguaasl.localservice.auth.AuthenticatedSession;
 
-public class HomeActivity extends AuthenticatedActivity
+public class HomeActivity extends BaseAuthenticatedActivity
 {
     private TextView welcomeText;
 
     @Override
-    protected void OnInitializeObjects()
+    protected void OnAwake()
     {
 
     }
 
     @Override
-    protected void OnInitializeViews()
+    protected int useLayout()
     {
-        setContentView(R.layout.activity_home);
+        return R.layout.activity_home;
+    }
 
+    @Override
+    protected void OnCreateViews()
+    {
         welcomeText = findViewById(R.id.home_welcome_text);
-        String message = String.format("Welcome home, %s ... Glad to be back?", user().getFirstname());
-        welcomeText.setText(message);
+
+        AuthenticatedSession session = AuthenticatedSession.getInstance(this);
+
+        String msg = String.format("Welcome home, %s ... Glad to be back?", session.getUser().getFirstname());
+        welcomeText.setText(msg);
     }
 }
