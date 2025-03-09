@@ -28,5 +28,57 @@
         <item name="android:backgroundDimEnabled">true</item>
     </style>
 
+<!--    <style name="NavBannerNavItemBase" parent="Widget.AppCompat.Button.Borderless">-->
+<!--        <item name="android:layout_width">wrap_content</item>-->
+<!--        <item name="android:layout_height">35dp</item>-->
+<!--        <item name="android:layout_weight">1</item>-->
+<!--        <item name="android:paddingHorizontal">12dp</item>-->
+<!--        <item name="android:textSize">12sp</item>-->
+<!--    </style>-->
+
+<!--    <style name="NavBannerNavItemInitial" parent="NavBannerNavItemBase">-->
+<!--        <item name="android:background">@drawable/banner_navbar_item_bg</item>-->
+<!--        <item name="android:textColor">@color/blue_grey_700</item>-->
+<!--    </style>-->
+
+<!--    <style name="NavBannerNavItemActive" parent="NavBannerNavItemBase">-->
+<!--        <item name="android:background">@drawable/banner_navbar_item_active_bg</item>-->
+<!--        <item name="android:textColor">@color/white</item>-->
+<!--    </style>-->
+
+<!--    <style name="NavBannerNavItemHomeInitial" parent="NavBannerNavItemInitial">-->
+<!--        <item name="android:drawableStart">@drawable/nav_item_icon_home</item>-->
+<!--    </style>-->
+
+<!--    <style name="NavBannerNavItemHomeActive" parent="NavBannerNavItemActive">-->
+<!--        <item name="android:drawableStart">@drawable/nav_item_icon_home_active</item>-->
+<!--    </style>-->
+
+<!--    <style name="NavBannerNavItemChatInitial" parent="NavBannerNavItemInitial">-->
+<!--        <item name="android:drawableStart">@drawable/nav_item_icon_chat</item>-->
+<!--    </style>-->
+
+<!--    <style name="NavBannerNavItemChatActive" parent="NavBannerNavItemActive">-->
+<!--        <item name="android:drawableStart">@drawable/nav_item_icon_chat_active</item>-->
+<!--    </style>-->
+
+<!--    <style name="NavBannerNavItemProfileInitial" parent="NavBannerNavItemInitial">-->
+<!--        <item name="android:drawableStart">@drawable/nav_item_icon_profile</item>-->
+<!--    </style>-->
+
+<!--    <style name="NavBannerNavItemProfileActive" parent="NavBannerNavItemActive">-->
+<!--        <item name="android:drawableStart">@drawable/nav_item_icon_profile_active</item>-->
+<!--    </style>-->
+
+    <style name="NavBannerNavItem" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">35dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:paddingHorizontal">12dp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:background">@drawable/banner_navbar_item_bg</item>
+        <item name="android:textColor">@color/blue_grey_700</item>
+        <item name="android:textFontWeight">600</item>
+    </style>
 
 </resources>

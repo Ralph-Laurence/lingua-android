@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/blue_grey_50"
+    android:elevation="5dp"
+    android:orientation="vertical"
+    android:paddingHorizontal="8dp"
+    android:paddingVertical="5dp"
+    tools:ignore="HardcodedText">
+
+    <!-- TITLE BAR -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal">
+
+        <!-- PAGE ICON -->
+        <ImageView
+            android:id="@+id/nav_banner_page_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/authenticated_screen_icon_home" />
+
+        <TextView
+            android:id="@+id/nav_banner_title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Home"
+            android:textAlignment="center"
+            android:textColor="@color/blue_grey_900"
+            android:textFontWeight="600"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/home_activity_settings_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/authenticated_screen_icon_settings" />
+
+    </LinearLayout>
+
+    <!-- NAVBAR -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/banner_navbar_inner"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="18dp">
+
+        <Button
+            android:id="@+id/navbar_item_home"
+            android:text="Home"
+            style="@style/NavBannerNavItem"
+            android:drawableStart="@drawable/nav_item_icon_home"/>
+
+        <Button
+            android:id="@+id/navbar_item_chat"
+            android:text="Chat"
+            style="@style/NavBannerNavItem"
+            android:layout_marginHorizontal="8dp"
+            android:drawableStart="@drawable/nav_item_icon_chat"/>
+
+        <Button
+            android:id="@+id/navbar_item_profile"
+            android:text="Profile"
+            style="@style/NavBannerNavItem"
+            android:drawableStart="@drawable/nav_item_icon_profile"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -15,7 +15,8 @@
     <color name="primary_200_variant1">#753CEC</color>
     <color name="primary_500_variant1">#6E07F3</color>
     <color name="primary_700_variant1">#4C00D0</color>
-
+    <color name="primary_dark">#231040</color>
+    <color name="primary_dark_700">#1D1134</color>
     <color name="primary_200">#9687D6</color>
     <color name="primary_500">#624CC2</color>
     <color name="primary_700">#413281</color>
@@ -23,6 +24,15 @@
     <color name="secondary_200">#F2F2F2</color>
     <color name="secondary_500">#E5E5E5</color>
     <color name="secondary_700">#CECECE</color>
+
+    <color name="grey_50">#FAFAFA</color>
+    <color name="blue_grey_50">#ECEFF1</color>
+    <color name="blue_grey_100">#CFD8DC</color>
+    <color name="blue_grey_200">#B0BEC5</color>
+    <color name="blue_grey_900">#263238</color>
+    <color name="blue_grey_700">#455A64</color>
+
+    <color name="deep_purple_900">#311B92</color>
 
     <color name="transparent">@android:color/transparent</color>
 </resources>

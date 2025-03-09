@@ -3,7 +3,6 @@ package psu.signlinguaasl.localservice.controllers;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -18,8 +17,7 @@ import psu.signlinguaasl.apiservice.auth.AuthService;
 import psu.signlinguaasl.apiservice.auth.AuthResponse;
 import psu.signlinguaasl.localservice.auth.AuthenticatedSession;
 import psu.signlinguaasl.localservice.models.User;
-import psu.signlinguaasl.localservice.security.SecureAuthToken;
-import psu.signlinguaasl.scene.HomeActivity;
+import psu.signlinguaasl.scene.LandingActivity;
 import psu.signlinguaasl.ui.custom.Modal;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -104,7 +102,7 @@ public class LoginController
         session.setSession(token, user);
 
         // Launch the home page (add the flags to prevent going back)
-        Intent intent = new Intent(context, HomeActivity.class);
+        Intent intent = new Intent(context, LandingActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         context.startActivity(intent);
 
