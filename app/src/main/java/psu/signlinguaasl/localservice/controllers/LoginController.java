@@ -3,6 +3,7 @@ package psu.signlinguaasl.localservice.controllers;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -16,6 +17,7 @@ import psu.signlinguaasl.apiservice.RetrofitClient;
 import psu.signlinguaasl.apiservice.auth.AuthService;
 import psu.signlinguaasl.apiservice.auth.AuthResponse;
 import psu.signlinguaasl.localservice.auth.AuthenticatedSession;
+import psu.signlinguaasl.localservice.models.Credentials;
 import psu.signlinguaasl.localservice.models.User;
 import psu.signlinguaasl.scene.LandingActivity;
 import psu.signlinguaasl.ui.custom.Modal;
@@ -34,7 +36,7 @@ public class LoginController
         modal = new Modal(this.context);
     }
 
-    public void InitiateLogin(String umail, String password, Runnable loginBegan, Runnable loginEnd)
+    public void InitiateLogin(String umail, String password, boolean rememberMe, Runnable loginBegan, Runnable loginEnd)
     {
         if (umail.isEmpty())
         {
@@ -67,8 +69,19 @@ public class LoginController
 
                 if (response.isSuccessful() && statusCode == ResponseCode.OK)
                 {
-                    AuthResponse authResponse = response.body();
-                    HandleSuccessfulLogin(authResponse);
+                    if (response.body() == null)
+                    {
+                        modal.ShowDanger("Sorry, we can't log you in due to a technical error. Please try again later.");
+                        loginEnd.run();
+                        return;
+                    }
+
+                    HandleSuccessfulLogin
+                    (
+                        response.body(),
+                        new Credentials(umail, password),
+                        rememberMe
+                    );
                 }
                 else
                 {
@@ -81,7 +94,7 @@ public class LoginController
             @Override
             public void onFailure(Call<AuthResponse> call, Throwable t)
             {
-                // Log.e("Login", "Error: " + t.getMessage());
+                Log.e("console", "Error: " + t.getMessage());
                 modal.ShowDanger("Sorry, our service is unreachable right now. Please check your network connection and try again.");
 
                 loginEnd.run();
@@ -89,10 +102,10 @@ public class LoginController
         });
     }
 
-    private void HandleSuccessfulLogin(AuthResponse authResponse)
+    private void HandleSuccessfulLogin(AuthResponse authResponse, Credentials credentials, boolean rememberMe)
     {
+        // String message  = authResponse.getMessage();
         String token    = authResponse.getToken();
-        String message  = authResponse.getMessage();
         User user       = authResponse.getUser();
 
         RetrofitClient.setAuthToken(token);
@@ -100,6 +113,17 @@ public class LoginController
         // Save token securely using SharedPreferences or EncryptedSharedPreferences
         AuthenticatedSession session = AuthenticatedSession.getInstance(context);
         session.setSession(token, user);
+
+        // Remember the user's login details to auto login him next time the app runs
+        if (rememberMe)
+        {
+            session.rememberUserCredentials(credentials.getUmail(), credentials.getPassword());
+            session.rememberUserId(user.getHashedId());
+        }
+        else
+        {
+
+        }
 
         // Launch the home page (add the flags to prevent going back)
         Intent intent = new Intent(context, LandingActivity.class);
@@ -111,15 +135,6 @@ public class LoginController
         {
             ((Activity)context).finish();
         }
-        // StringBuilder sb = new StringBuilder();
-        // sb.append(message);
-        // sb.append("\n\nWith token: ");
-        // sb.append(tokenStore.getToken());
-        // sb.append("\n\nWelcome, ");
-        // sb.append(user.getFirstname());
-        // String msg = sb.toString();
-
-        // Toast.makeText(context, msg , Toast.LENGTH_SHORT).show();
     }
 
     private void HandleFailedLogin(Response<AuthResponse> response)

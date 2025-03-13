@@ -12,5 +12,7 @@ data class User
     val role        : Int,
     val contact     : String,
     val address     : String,
+    val password    : String,
+    val hashedId    : String,
 )
 

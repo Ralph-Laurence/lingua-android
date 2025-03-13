@@ -15,6 +15,16 @@
     <psu.signlinguaasl.ui.custom.NavBanner
         android:id="@+id/landing_nav_banner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"/>
+
+    <!-- MAIN CONTENT -->
+    <FrameLayout
+        android:id="@+id/landing_subscenes_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/landing_nav_banner">
+
+    </FrameLayout>
 
 </RelativeLayout>

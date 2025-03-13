@@ -38,26 +38,26 @@ public class MainActivity2 extends AppCompatActivity
 
     private void TestHttp()
     {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Routes.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        ApiService apiService = retrofit.create(ApiService.class);
-        Call<ApiResponse> call = apiService.androidTest();
-        call.enqueue(new Callback<ApiResponse>()
-        {
-            @Override
-            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    txvResponse.setText(response.body().getMessage());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ApiResponse> call, Throwable t) {
-                txvResponse.setText("Error: " + t.getMessage());
-            }
-        });
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl(Routes.BASE_URL)
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//
+//        ApiService apiService = retrofit.create(ApiService.class);
+//        Call<ApiResponse> call = apiService.androidTest();
+//        call.enqueue(new Callback<ApiResponse>()
+//        {
+//            @Override
+//            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+//                if (response.isSuccessful() && response.body() != null) {
+//                    txvResponse.setText(response.body().getMessage());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ApiResponse> call, Throwable t) {
+//                txvResponse.setText("Error: " + t.getMessage());
+//            }
+//        });
     }
 }

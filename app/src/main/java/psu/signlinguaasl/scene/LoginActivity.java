@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowInsets;
 import android.view.WindowInsetsController;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
@@ -18,7 +20,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 import psu.signlinguaasl.IActivityBlueprint;
 import psu.signlinguaasl.R;
+import psu.signlinguaasl.localservice.auth.AuthenticatedSession;
 import psu.signlinguaasl.localservice.controllers.LoginController;
+import psu.signlinguaasl.localservice.models.Credentials;
 import psu.signlinguaasl.localservice.utils.Prefs;
 import psu.signlinguaasl.ui.custom.Modal;
 
@@ -27,6 +31,7 @@ public class LoginActivity extends AppCompatActivity implements IActivityBluepri
     private Button btnLogin;
     private EditText inputUmail;
     private EditText inputPassword;
+    private CheckBox chkRememberMe;
 
     private LoginController loginController;
 
@@ -79,19 +84,50 @@ public class LoginActivity extends AppCompatActivity implements IActivityBluepri
             return insets;
         });
 
-        inputPassword = findViewById(R.id.input_password);
-        inputUmail = findViewById(R.id.input_umail);
+        inputPassword   = findViewById(R.id.input_password);
+        inputUmail      = findViewById(R.id.input_umail);
+        chkRememberMe   = findViewById(R.id.chk_remember_me);
 
         btnLogin = findViewById(R.id.btn_login);
-        btnLogin.setOnClickListener(view -> Login());
+        btnLogin.setOnClickListener(view -> loginOnBtnClicked());
+
+        // Check for cached user session data then perform auto login
+        checkAuth();
     }
 
-    private void Login()
+    private void loginOnBtnClicked()
     {
-        String password = inputPassword.getText().toString();
-        String umail = inputUmail.getText().toString();
+        String password     = inputPassword.getText().toString();
+        String umail        = inputUmail.getText().toString();
+        boolean rememberMe  = chkRememberMe.isChecked();
 
-        loginController.InitiateLogin(umail, password,
+        performLogin(new Credentials(umail, password), rememberMe);
+    }
+
+    private void checkAuth()
+    {
+        // Check if there was a cached user credential
+        AuthenticatedSession authSession = AuthenticatedSession.getInstance(getApplicationContext());
+
+        if (!authSession.checkSession())
+            return;
+
+        Credentials credentials = authSession.loadUserCredentials();
+
+        // Auto login the user using his credentials
+        if (credentials == null)
+            return;
+
+        Log.e("console", "REACHED!");
+        performLogin(credentials, true);
+    }
+
+    private void performLogin(Credentials credentials, boolean rememberMe)
+    {
+        String password     = credentials.getPassword();
+        String umail        = credentials.getUmail();
+
+        loginController.InitiateLogin(umail, password, rememberMe,
         () -> {
             // login began
             btnLogin.setEnabled(false);

@@ -32,7 +32,14 @@
     <color name="blue_grey_900">#263238</color>
     <color name="blue_grey_700">#455A64</color>
 
+    <color name="deep_purple_700">#512DA8</color>
     <color name="deep_purple_900">#311B92</color>
 
     <color name="transparent">@android:color/transparent</color>
+    <color name="deep_purple_500">#673AB7</color>
+    <color name="blue_grey_400">#78909C</color>
+    <color name="indigo_100">#9FA8DA</color>
+
+    <color name="amber_50">#FFF8E1</color>
+    <color name="yellow_800">#F9A825</color>
 </resources>

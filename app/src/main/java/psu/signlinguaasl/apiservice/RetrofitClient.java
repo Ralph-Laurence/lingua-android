@@ -6,8 +6,14 @@ import android.net.wifi.WifiManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import java.util.List;
+
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import psu.signlinguaasl.BuildConfig;
 import psu.signlinguaasl.apiservice.middleware.AuthMiddleware;
+import psu.signlinguaasl.apiservice.middleware.NgrokMiddleware;
 import psu.signlinguaasl.localservice.auth.AuthenticatedSession;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -19,13 +25,18 @@ public class RetrofitClient {
     private static WifiManager m_wifiMan;
 
     private RetrofitClient() {}
+    private static String BASE_URL;
 
     public static synchronized RetrofitClient getInstance(Context context)
     {
-        if (m_instance == null) {
+        if (m_instance == null)
+        {
             m_instance = new RetrofitClient();
             m_authToken = AuthenticatedSession.getInstance(context.getApplicationContext()).getAuthToken();
             m_wifiMan = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+
+            BASE_URL = BuildConfig.BASE_URL;
+            // Log.e("console", BASE_URL);
         }
         return m_instance;
     }
@@ -44,7 +55,16 @@ public class RetrofitClient {
     {
         if (m_retrofit == null)
         {
+            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+
             OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
+
+            if (BuildConfig.IS_DEVELOPMENT)
+            {
+                clientBuilder.addInterceptor(logging);
+                clientBuilder.addInterceptor(new NgrokMiddleware());
+            }
 
             // Add middleware only if token is available
             if (!TextUtils.isEmpty(m_authToken)) {
@@ -52,8 +72,7 @@ public class RetrofitClient {
             }
 
             m_retrofit = new Retrofit.Builder()
-                    .baseUrl(Routes.BASE_URL)
-                    //.baseUrl(getBaseUrl())
+                    .baseUrl(BASE_URL)
                     .client(clientBuilder.build())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <corners android:radius="10dp" />
-    <solid android:color="@color/deep_purple_900" />
-</shape>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/banner_navbar_item_active_pressed_bg" android:state_pressed="true"/>
+    <item android:drawable="@drawable/banner_navbar_item_active_hovered_bg" android:state_focused="true"/>
+    <item android:drawable="@drawable/banner_navbar_item_active_hovered_bg" android:state_hovered="true"/>
+    <item android:drawable="@drawable/banner_navbar_item_active_normal_bg"/>
+</selector>
+
+<!-- SOME STATES OTHER THAN NORMAL STATE MAYBE USELESS WHEN NAV ITEM ACTIVE IS SET TO NOT RECEIVE CLICKS -->

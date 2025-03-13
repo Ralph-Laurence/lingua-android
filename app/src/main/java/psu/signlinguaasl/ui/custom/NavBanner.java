@@ -78,6 +78,9 @@ public class NavBanner extends LinearLayout //implements View.OnClickListener
 
             navItem.setOnClickListener(v -> handleNavItemClicked(navItem, key, obj));
         });
+
+        // Initially set the first item as selected
+        setNavItemActive(homeButton, "home");
     }
 
     private void handleNavItemClicked(Button sender, String key, Triplet<Button, String, Integer> obj)
@@ -102,6 +105,10 @@ public class NavBanner extends LinearLayout //implements View.OnClickListener
 
     private void setNavItemActive(Button button, String iconKey)
     {
+        // Force the button to be not clickable
+        button.setClickable(false);
+
+        // Change the appearance
         int activeIcon = navItemsActiveIcons.get(iconKey);
 
         setNavItemAppearance(button, R.drawable.banner_navbar_item_active_bg, BUTTON_TEXT_COLOR_ACTIVE, activeIcon);
@@ -109,9 +116,11 @@ public class NavBanner extends LinearLayout //implements View.OnClickListener
 
     private void setNavItemInactive(Button button, String iconKey)
     {
-        int inactiveIcon = navItemsInactiveIcons.get(iconKey);
+        // Allow the button to be receive clicks
+        button.setClickable(true);
 
-        Log.e("console", "INACTIVE = " + inactiveIcon);
+        // Change the appearance
+        int inactiveIcon = navItemsInactiveIcons.get(iconKey);
 
         setNavItemAppearance(button, R.drawable.banner_navbar_item_bg, BUTTON_TEXT_COLOR_NORMAL, inactiveIcon);
     }

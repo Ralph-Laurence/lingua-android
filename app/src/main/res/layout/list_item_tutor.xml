@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/list_item_tutor_photo"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:scaleType="centerCrop"
+        android:layout_alignParentStart="true"
+        android:layout_marginEnd="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/list_item_tutor_photo"
+        android:orientation="vertical"
+        android:paddingHorizontal="4dp">
+
+        <TextView
+            android:id="@+id/list_item_tutor_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text="Tutor Name"
+            android:textColor="@color/blue_grey_900"
+            android:ellipsize="middle"
+            android:singleLine="true"
+            android:layout_marginBottom="5dp"/>
+
+        <TextView
+            android:id="@+id/list_item_tutor_bio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:maxLines="2"
+            android:text="Lorem ipsum odor amet, consectetuer adipiscing elit. Proin vel curae dolor praesent libero magna litora orci. Quam conubia risus volutpat habitant rutrum netus."
+            android:ellipsize="end"/>
+
+        <!-- RATINGS, TOTAL STUDENTS, DISABILITY -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="8dp">
+
+            <!-- RATINGS -->
+            <TextView
+                android:id="@+id/list_item_tutor_total_ratings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:text="4.5"
+                android:textColor="@color/blue_grey_900"
+                android:drawableEnd="@drawable/ic_tutor_list_item_rating"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:layout_marginEnd="12dp"/>
+
+            <TextView
+                android:id="@+id/list_item_tutor_total_learners"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:text="100"
+                android:textColor="@color/blue_grey_900"
+                android:drawableEnd="@drawable/ic_tutor_list_item_total_learners"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>
