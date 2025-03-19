@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:flexbox="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_my_tutors_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".scene.MyTutorsActivity"
+    tools:ignore="HardcodedText,ContentDescription">
+
+    <!-- BANNER -->
+    <include layout="@layout/merge_tutors_list_header" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/merge_tutors_list_nav_banner">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            flexbox:justifyContent="flex_start"
+            flexbox:alignItems="flex_start"
+            flexbox:flexWrap="wrap"
+            android:id="@+id/activity_my_tutors_cardview_container"/>
+
+    </ScrollView>
+
+</RelativeLayout>

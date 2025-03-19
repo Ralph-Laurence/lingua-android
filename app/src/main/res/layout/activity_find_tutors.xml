@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".scene.FindTutorsActivity"
+    tools:ignore="HardcodedText,ContentDescription"
+    android:clipToPadding="false"
+    android:clipChildren="false">
+
+    <!-- BANNER -->
+    <include layout="@layout/merge_tutors_list_header" />
+    <!-- MAIN CONTENT -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="14dp"
+        android:layout_below="@id/merge_tutors_list_nav_banner"
+        android:layout_above="@id/pagination_container">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/find_tutors_list_recycler"/>
+
+    </RelativeLayout>
+
+    <!-- PAGINATION BUTTONS -->
+    <LinearLayout
+        android:id="@+id/pagination_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="24dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="16dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone">
+
+    </LinearLayout>
+
+</RelativeLayout>

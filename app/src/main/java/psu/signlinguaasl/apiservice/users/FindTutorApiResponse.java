@@ -1,13 +1,14 @@
-package psu.signlinguaasl.apiservice.auth;
+package psu.signlinguaasl.apiservice.users;
 
 import java.util.List;
 
 import psu.signlinguaasl.localservice.models.Tutor;
 
-public class TutorResponse
+public class FindTutorApiResponse
 {
     public Data data;
 
+    // ONLY USED DURING DEVELOPMENT
     @Override
     public String toString() {
         return "Data{" +

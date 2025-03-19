@@ -120,10 +120,6 @@ public class LoginController
             session.rememberUserCredentials(credentials.getUmail(), credentials.getPassword());
             session.rememberUserId(user.getHashedId());
         }
-        else
-        {
-
-        }
 
         // Launch the home page (add the flags to prevent going back)
         Intent intent = new Intent(context, LandingActivity.class);
@@ -151,7 +147,7 @@ public class LoginController
         catch (Exception e)
         {
             e.printStackTrace();
-            modal.ShowDanger("The server isn't working right now. Please come back later.");
+            modal.ShowDanger("Our service isn't working right now. Please come back later.");
         }
     }
 }

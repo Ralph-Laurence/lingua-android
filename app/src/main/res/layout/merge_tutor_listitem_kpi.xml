@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- RATINGS, TOTAL STUDENTS, DISABILITY -->
+    <LinearLayout
+        android:id="@+id/tutor_list_item_kpi_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingVertical="4dp"
+        android:gravity="center_vertical">
+
+        <!-- RATINGS -->
+        <TextView
+            android:id="@+id/tutor_list_item_kpi_total_ratings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:text="0.0"
+            android:textColor="@color/blue_grey_900"
+            android:drawableEnd="@drawable/ic_tutor_list_item_rating"
+            android:drawablePadding="5dp"
+            android:gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/tutor_list_item_kpi_total_learners"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:text="0"
+            android:textColor="@color/blue_grey_900"
+            android:drawableEnd="@drawable/ic_tutor_list_item_total_learners"
+            android:drawablePadding="5dp"
+            android:gravity="center_vertical"
+            android:layout_marginHorizontal="12dp"/>
+
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/disability_deafmute"
+            android:id="@+id/tutor_list_item_kpi_disability"
+            android:visibility="invisible"/>
+
+    </LinearLayout>
+
+</merge>

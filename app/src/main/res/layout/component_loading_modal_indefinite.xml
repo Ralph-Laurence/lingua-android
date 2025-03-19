@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="24dp"
+    android:layout_marginHorizontal="20dp"
+    android:background="@drawable/modal_background_loading"
+    tools:ignore="HardcodedText,ContentDescription"
+    android:gravity="center">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="10dp"
+        android:scaleY="3"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/deep_purple_700"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingHorizontal="5dp"
+        android:text="Loading please wait..."
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:layout_marginBottom="40dp"
+        android:id="@+id/loading_modal_indefinite_message"/>
+
+</LinearLayout>

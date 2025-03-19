@@ -13,28 +13,24 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
     <!-- Base application theme. -->
     <style name="Base.Theme.SignLingua" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-<!--        <item name="windowActionBar">false</item>-->
-<!--        <item name="windowNoTitle">true</item>-->
-        <item name="android:windowTranslucentStatus">true</item>
         <item name="fontFamily">@font/primary_font</item>
         <item name="android:includeFontPadding">false</item>
-    </style>
-
-    <style name="LoginScreenTheme" parent="Base.Theme.SignLingua">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <!--        <item name="windowActionBar">false</item>-->
-        <!--        <item name="windowNoTitle">true</item>-->
-        <item name="android:statusBarColor">@color/transparent</item>
-        <item name="android:navigationBarColor">@color/transparent</item>
+        <item name="android:textColor">#262539</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowFullscreen">false</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:fitsSystemWindows">false</item>
-        <item name="fontFamily">@font/primary_font</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <style name="LoginScreenTheme" parent="Base.Theme.SignLingua">
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
         <item name="android:textColor">#262539</item>
     </style>
 

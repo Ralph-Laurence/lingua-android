@@ -10,4 +10,6 @@ object Routes {
     const val logout        : String = "logout"
 
     const val findTutors    : String = "signlingua/tutors"
+    const val tutorDetails  : String = "signlingua/tutors/{id}"
+    const val myTutors      : String = "signlingua/learners/{id}/tutors"
 }

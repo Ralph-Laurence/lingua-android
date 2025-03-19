@@ -82,6 +82,7 @@
                     </RelativeLayout>
 
                     <Button
+                        android:id="@+id/home_subscene_btn_my_tutors"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableEnd="@drawable/baseline_keyboard_arrow_right_24"

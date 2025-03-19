@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".scene.TutorDetailsActivity"
+    tools:ignore="HardcodedText">
+
+    <!-- BACKGROUND IMAGE -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/common_gradient_bg"/>
+
+    <!-- NAVIGATION -->
+    <LinearLayout
+        android:id="@+id/activity_tutor_details_nav_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="8dp"
+        android:paddingTop="25dp">
+
+        <Button
+            android:id="@+id/activity_tutor_details_btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/baseline_arrow_back_24"
+            android:background="@color/transparent"
+            android:text="Back"
+            android:textColor="@color/white"
+            android:textFontWeight="600"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:drawablePadding="10dp" />
+
+    </LinearLayout>
+
+    <!-- SCROLLABLE CONTENT -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/activity_tutor_details_nav_banner">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:clipChildren="false"
+            android:clipToPadding="false">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="Tutor Profile"
+                android:textFontWeight="600"
+                android:textAlignment="center"
+                android:padding="24dp"
+                android:textSize="20sp" />
+
+            <RelativeLayout
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:background="@drawable/rounded_background_25rad"
+                android:layout_gravity="center"
+                android:layout_marginVertical="6dp"
+                android:padding="5dp"
+                android:gravity="center"
+                android:clipChildren="false"
+                android:clipToPadding="false">
+
+                <!-- PROFILE PIC -->
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/default_avatar"
+                    android:id="@+id/activity_tutor_details_profile_photo"
+                    android:scaleType="centerCrop" />
+
+                <!-- DISABILITY BADGE -->
+                <LinearLayout
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/circle_background"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="-16dp"
+                    android:layout_marginBottom="-16dp"
+                    android:padding="2dp"
+                    android:id="@+id/activity_tutor_details_disability_badge">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/disability_deafmute"
+                        android:id="@+id/activity_tutor_details_disability_icn"
+                        android:scaleType="centerCrop" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <!-- FULL NAME -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="FirstName LastName"
+                android:textFontWeight="600"
+                android:textAlignment="center"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="10dp"
+                android:textSize="16sp"
+                android:id="@+id/activity_tutor_details_tutor_name" />
+
+            <!-- BIO -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:alpha="0.8"
+                android:text="Tutor doesn't have a bio"
+                android:textAlignment="center"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="10dp"
+                android:textSize="14sp"
+                android:id="@+id/activity_tutor_details_bio"
+                android:layout_marginBottom="10dp" />
+
+            <!-- BOOKING REQUEST / LEAVE -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginBottom="15dp">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/WarningButton"
+                    android:text="Add Tutor"
+                    android:textSize="14sp"
+                    android:paddingHorizontal="24dp" />
+
+            </RelativeLayout>
+
+            <!-- KPI BAR -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- TOTAL RATINGS -->
+                <LinearLayout style="@style/kpi_bar_item">
+
+                    <TextView
+                        android:id="@+id/activity_tutor_details_total_ratings"
+                        style="@style/kpi_bar_item_numeric_icon"
+                        android:drawablePadding="5dp"
+                        android:text="0.0"
+                        app:drawableStartCompat="@drawable/ic_kpi_star" />
+
+                    <TextView
+                        style="@style/kpi_bar_item_caption"
+                        android:text="Ratings"/>
+
+                </LinearLayout>
+
+                <!-- TOTAL LEARNERS -->
+                <LinearLayout style="@style/kpi_bar_item">
+
+                    <TextView
+                        android:id="@+id/activity_tutor_details_total_learners"
+                        style="@style/kpi_bar_item_numeric_icon"
+                        android:drawablePadding="5dp"
+                        android:text="0"
+                        app:drawableStartCompat="@drawable/ic_kpi_learners" />
+
+                    <TextView
+                        style="@style/kpi_bar_item_caption"
+                        android:text="Learners"/>
+
+                </LinearLayout>
+
+                <!-- TOTAL REVIEWS -->
+                <LinearLayout style="@style/kpi_bar_item">
+
+                    <TextView
+                        android:id="@+id/activity_tutor_details_total_reviews"
+                        style="@style/kpi_bar_item_numeric_icon"
+                        android:drawablePadding="5dp"
+                        android:text="0"
+                        app:drawableStartCompat="@drawable/ic_kpi_review" />
+
+                    <TextView
+                        style="@style/kpi_bar_item_caption"
+                        android:text="Reviews"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- ADDRESS AND CONTACT DETAILS -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="24dp">
+
+                <!-- ADDRESS -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="36dp"
+                    android:layout_marginBottom="14dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_tutor_details_address"
+                        android:layout_marginEnd="8dp"/>
+
+                    <TextView
+                        android:id="@+id/activity_tutor_details_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Tutor didn't provided their address"
+                        android:textSize="14sp"
+                        android:textColor="@color/white"
+                        android:layout_gravity="center_vertical"/>
+
+                </LinearLayout>
+
+                <!-- CONTACT -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="36dp"
+                    android:layout_marginBottom="14dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_tutor_details_contact"
+                        android:layout_marginEnd="8dp"/>
+
+                    <TextView
+                        android:id="@+id/activity_tutor_details_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="N/A"
+                        android:textSize="14sp"
+                        android:textColor="@color/white"
+                        android:layout_gravity="center_vertical"/>
+
+                </LinearLayout>
+
+                <!-- EMAIL -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="36dp"
+                    android:layout_marginBottom="24dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_tutor_details_mail"
+                        android:layout_marginEnd="8dp"/>
+
+                    <TextView
+                        android:id="@+id/activity_tutor_details_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="N/A"
+                        android:textSize="14sp"
+                        android:textColor="@color/white"
+                        android:includeFontPadding="false"
+                        android:layout_gravity="center_vertical"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- BEGIN INFORMATION CONTAINER -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/light_corner_top_25rad"
+                android:padding="24dp">
+
+                <TextView
+                    style="@style/activity_tutor_details_section_title"
+                    android:text="About Me"
+                    android:drawableStart="@drawable/ic_about_me"/>
+
+                <TextView
+                    android:id="@+id/activity_tutor_details_about_me"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tutor didn't provide details about themself"
+                    android:textSize="14sp"
+                    android:drawablePadding="5dp"
+                    android:textColor="@color/blue_grey_700"
+                    android:ellipsize="end"
+                    android:maxLines="5"/>
+
+                <Button
+                    android:id="@+id/activity_tutor_details_showmore_aboutme"
+                    style="@style/btn_show_more"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:id="@+id/activity_tutor_details_resume_section_header"
+                    style="@style/activity_tutor_details_section_title"
+                    android:text="Resume"
+                    android:drawableStart="@drawable/ic_resume"/>
+
+                <!-- EDUCATIONAL ATTAINMENT -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/activity_tutor_details_education_container">
+
+                    <TextView
+                        style="@style/doc_proof_section_header"
+                        android:text="Educational Attainment"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/activity_tutor_details_educ_proofs"/>
+
+                </LinearLayout>
+                <!-- WORK EXPERIENCE -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/activity_tutor_details_workexp_container">
+
+                    <TextView
+                        style="@style/doc_proof_section_header"
+                        android:text="Work Experience"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/activity_tutor_details_work_proofs"/>
+
+                </LinearLayout>
+
+                <!-- CERTIFICATIONS -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/activity_tutor_details_certifications_container">
+
+                    <TextView
+                        style="@style/doc_proof_section_header"
+                        android:text="Certifications"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/activity_tutor_details_cert_proofs"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- OVERLAY LOADING MASK -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/common_gradient_bg"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:id="@+id/activity_tutor_details_loading_mask">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="24dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_loading_gear_white"
+                android:id="@+id/activity_tutor_details_gear_med"
+                android:layout_toStartOf="@id/activity_tutor_details_gear_large"/>
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_loading_gear_white"
+                android:id="@+id/activity_tutor_details_gear_large"
+                android:layout_centerInParent="true"/>
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Loading tutor details..."
+            android:textSize="20sp"
+            android:drawablePadding="5dp"
+            android:textColor="@color/white"
+            android:layout_marginBottom="24dp"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
