@@ -15,7 +15,7 @@ interface TutorsApiService
         @Query("page") page : Int,
         @Query("learnerId") learnerId : String,
         @Query("search") search : String?
-    ) : Call<FindTutorApiResponse>
+    ) : Call<TutorsListApiResponse>
 
     // Fetch all tutors that belong to a specific learner,
     @GET(Routes.myTutors)
@@ -24,7 +24,7 @@ interface TutorsApiService
         @Path("id") learnerId : String,
         @Query("page") page : Int,
         @Query("search") search : String?
-    ) : Call<FindTutorApiResponse>
+    ) : Call<TutorsListApiResponse>
 
     // Show the full details of the selected tutor
     @GET(Routes.tutorDetails)

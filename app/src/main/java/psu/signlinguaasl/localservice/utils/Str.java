@@ -17,4 +17,12 @@ public class Str
     {
         return Jsoup.clean(dangerous, Safelist.basic());
     }
+
+    public static String pluralize(String subject, int with)
+    {
+        if (subject.endsWith("s"))
+            return subject;
+
+        return with == 1 ? subject : subject + 's';
+    }
 }
